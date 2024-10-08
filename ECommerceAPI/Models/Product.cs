@@ -11,5 +11,12 @@ public class Product
     public string? Name { get; set; }
 
     [Required]
-    public decimal Price { get; set; }
+    public float Price { get; set; }
+
+    // Foreign key property for cateogry
+    [Required]
+    public int CategoryID { get; set; }
+
+    // Navigation property to Category
+    public Category? Category { get; set; }
 }
