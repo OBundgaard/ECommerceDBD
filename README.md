@@ -1,4 +1,8 @@
 # ECommerceDBD
+Manual branch: `main-manual`
+
+EF branch: `main-ef`
+
 ## Setup instructions
 For either part you still need to have a database regardless.
 
