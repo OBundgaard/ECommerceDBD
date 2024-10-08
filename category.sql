@@ -6,7 +6,7 @@ CREATE TABLE Categories (
 
 -- Modify Products table to include category_id
 ALTER TABLE Products
-ADD COLUMN category_id INT;
+ADD category_id INT;
 
 -- Add foreign key constraint between Products and Categories
 ALTER TABLE Products
