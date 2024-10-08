@@ -6,6 +6,7 @@ namespace ECommerceAPI;
 public class ECommerceDbContext : DbContext
 {
     public DbSet<Product> Products { get; set; }
+    public DbSet<ProductRating> ProductRatings { get; set; }
 
     public ECommerceDbContext(DbContextOptions<ECommerceDbContext> options) : base(options)
     {
@@ -17,6 +18,13 @@ public class ECommerceDbContext : DbContext
         // Initial product model setup
         modelBuilder.Entity<Product>().HasKey(p => p.ProductID);
         modelBuilder.Entity<Product>().Property(p => p.ProductID).ValueGeneratedNever();
+
+        // Configure the relationship between Product and Product rating
+        modelBuilder.Entity<ProductRating>()
+            .HasOne(p => p.Product)
+            .WithMany()
+            .HasForeignKey(p => p.ProductRatingID)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
