@@ -8,6 +8,8 @@ public class ECommerceDbContext : DbContext
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Categories { get; set; }
 
+    public DbSet<ProductRating> ProductRatings { get; set; }
+
     public ECommerceDbContext(DbContextOptions<ECommerceDbContext> options) : base(options)
     {
         Database.EnsureCreated();
@@ -24,6 +26,13 @@ public class ECommerceDbContext : DbContext
             .HasOne(p => p.Category)
             .WithMany()
             .HasForeignKey(p => p.CategoryID)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Configure the relationship between Product and Product rating
+        modelBuilder.Entity<ProductRating>()
+            .HasOne(p => p.Product)
+            .WithMany()
+            .HasForeignKey(p => p.ProductRatingID)
             .OnDelete(DeleteBehavior.Cascade);
     }
 
